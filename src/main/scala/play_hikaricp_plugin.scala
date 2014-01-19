@@ -50,13 +50,13 @@ object PimpedPlayConfiguration {
     def getStringOrReportError(key: String, error_msg: String = "missing configuration %s"): String = {
       self.getString(key).fold[String]
       { throw self.reportError(key, error_msg.format(key)) }
-      { _ }
+      { identity[String] }
     }
 
     def getConfigOrReportError(key: String, error_msg: String = "missing configuration %s"): Configuration = {
       self.getConfig(key).fold[Configuration]
       { throw self.reportError(key, error_msg.format(key)) }
-      { _ }
+      { identity[Configuration] }
     }
   }
 }
